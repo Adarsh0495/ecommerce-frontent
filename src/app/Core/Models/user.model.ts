@@ -1,5 +1,6 @@
-export interface user{
-    userid:string
-    email:string
-    password:string 
+export interface user {
+    userid: string
+    email: string
+    password: string
+    role?: string
 }
