@@ -1,0 +1,23 @@
+<div class="container mt-5">
+    <div class="row justify-content-center" >
+        <div class="col-lg-5 col-lg-4">
+            <div class="card shadow-sm p-4 rounded">
+                <h2 class="text-left mb-4 fs-4 fw-bolder">Login Here</h2>
+                <form (ngSubmit)="loginsubmit()" #loginform="ngForm">
+                    <div class="mb-3">
+                        <label for="userId" class="form-label">User ID</label>
+                        <input type="text" class="form-control" id="userId" placeholder="User ID" name="userid" ngModel required #userid="ngModel">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password" name="password"ngModel required #password="ngModel">
+                    </div>
+
+                    <button type="submit" class="btn btn-danger w-100 mt-3"> Login</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

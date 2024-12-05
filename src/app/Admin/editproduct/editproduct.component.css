@@ -1,0 +1,51 @@
+
+  
+  .col-auto.collapsed {
+    width: 60px;
+    transition: width 0.3s ease;
+  }
+  
+  .col-auto {
+    transition: width 0.3s ease;
+  }
+  
+  .expanded {
+    padding-left: 10px;
+    transition: padding-left 0.3s ease;
+  }
+  
+  .collapsed {
+    transition: padding-left 0.3s ease;
+  }
+  
+  @media (max-width: 767px) {
+  
+    .button {
+      display: block;
+    }
+  }
+  
+  .navicon {
+    margin-right: 100px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    /* margin-left: 10px; */
+  }
+
+  .navicon:hover{
+    transform: scale(1.1);    
+    transition: all 0.1s ease-in-out;
+  }
+  button:hover {
+    /* transform: scale(1.1);     */
+    transition: all 0.2s ease-in-out;
+  }
+
+    .container {
+      max-width: 600px; /* Limit the width of the container */
+    }
+    
+    .card {
+      border-radius: 10px; /* Smooth rounded corners */
+    }

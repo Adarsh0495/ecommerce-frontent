@@ -1,0 +1,112 @@
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <!-- Sidebar -->
+    <div 
+      [class.collapsed]="isSideBarCollapsed" 
+      class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark position-sticky top-0" 
+      style="height: 100vh; ">
+      <div class="d-flex flex-column align-items-center align-items-sm-start px-sm-2 pt-2 text-white min-vh-100">
+        
+        <!-- Sidebar Toggle (only visible on smaller screens) -->
+        <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none w-100 " >
+          <button class="btn btn-outline-light mb-2 mt-3 ml-0 " (click)="toggleSideBar()" style="border: none; background: transparent; padding-left: 0px;">
+            <img src="../../../assets/sidenav/download.png" 
+                 alt="Toggle Sidebar" style="width: 30px; height: 30px; border-radius: 5px;">
+          </button>
+        </a>
+    
+        <!-- Sidebar Menu -->
+        <ul 
+          *ngIf="!isSideBarCollapsed" 
+          [ngClass]="{'expanded': !isSideBarCollapsed, 'collapsed': isSideBarCollapsed}" 
+          class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" 
+          id="menu">
+          <li>
+            <a routerLink="/adminhome" class="nav-link px-0 align-middle text-light ">
+              <i class="fs-4 bi-speedometer2"></i> 
+              <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/adminusers" class="nav-link px-0 align-middle text-light">
+              <i class="fs-4 bi-table"></i> 
+              <span class="ms-1 d-none d-sm-inline">Users</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/adminproducts" class="nav-link px-0 align-middle text-light">
+              <i class="fs-4 bi-bootstrap"></i> 
+              <span class="ms-1 d-none d-sm-inline">Products</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/addproducts" class="nav-link px-0 align-middle text-light">
+              <i class="fs-4 bi-grid"></i> 
+              <span class="ms-1 d-none d-sm-inline">Add Product</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/login" class="nav-link px-0 align-middle text-light">
+              <i class="fs-4 bi-people"></i> 
+              <span class="ms-1 d-none d-sm-inline">Sign Out</span>
+            </a>
+          </li>
+        </ul>
+    
+        <!-- Collapsed Sidebar Icons (only visible on smaller screens) -->
+        <ul *ngIf="isSideBarCollapsed"
+            class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
+          <li class="mt-5">
+            <a routerLink="/adminhome"><img class="navicon" src="../../../assets/sidenav/dashboard1.png" alt=""></a>
+          </li>
+          <li class="mt-5">
+            <a routerLink="/adminusers"><img class="navicon" src="../../../assets/sidenav/user1.png" alt=""></a>
+          </li>
+          <li class="mt-5">
+            <a routerLink="/adminproducts"><img class="navicon" src="../../../assets/sidenav/productlist2.png" alt=""></a>
+          </li>
+          <li class="mt-5">
+            <a routerLink="/addproducts"><img class="navicon" src="../../../assets/sidenav/addproduct1.png" alt=""></a>
+          </li>
+          <li class="mt-5">
+            <a routerLink="/login"><img class="navicon" src="../../../assets/sidenav/sign.jpg" alt=""></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title text-uppercase mb-0">Manage Users</h5>
+              </div>
+              <div class="table-responsive">
+                <table class="table no-wrap user-table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Name</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Iterate through 'adminUsers' and access specific properties -->
+                    <tr *ngFor="let user of adminUsers">
+                      <td>
+                        <h5 class="font-medium mb-0">{{ user.userid }}</h5>
+                      </td>
+                      <td>
+                        <span class="text-muted">{{ user.email }}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    

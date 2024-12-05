@@ -1,0 +1,49 @@
+
+  
+  .col-auto.collapsed {
+    width: 60px;
+    transition: width 0.3s ease;
+  }
+  
+  .col-auto {
+    transition: width 0.3s ease;
+  }
+  
+  .expanded {
+    transition: padding-left 0.3s ease;
+  }
+  
+  .collapsed {
+    transition: padding-left 0.3s ease;
+  }
+  
+  @media (max-width: 767px) {
+  
+    .button {
+      display: block;
+    }
+  }
+  
+  .navicon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+  }
+
+  .navicon:hover{
+    transform: scale(1.1);    
+    transition: all 0.1s ease-in-out;
+  }
+    button:hover {
+      transform: scale(1.1);    
+      transition: all 0.2s ease-in-out;
+    }
+  /* iygiygigiu */
+
+  .form-container {
+    border: 1px solid #dee2e6; /* Light border for better definition */
+  }
+  
+
+
+  

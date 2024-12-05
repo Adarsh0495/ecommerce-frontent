@@ -1,0 +1,40 @@
+.col-auto.collapsed {
+    width: 64px;
+    /* Adjust the width as needed */
+    transition: width 0.3s ease;
+    /* Adjust the transition duration and easing function as needed */
+  }
+  
+  .col-auto {
+    transition: width 0.3s ease;
+    /* Ensure there's a transition even when not collapsing */
+  }
+  
+  .expanded {
+    padding-left: 10px;
+    /* Adjust the padding according to your expanded sidebar width */
+    transition: padding-left 0.3s ease;
+    /* Add a transition for a smooth effect */
+  }
+  
+  .collapsed {
+    padding-right: 100px;
+    /* Adjust the padding according to your collapsed sidebar width */
+    transition: padding-left 0.3s ease;
+    /* Add a transition for a smooth effect */
+  }
+  
+  @media (max-width: 767px) {
+  
+    /* CSS styles for smaller screens */
+    .button {
+      display: block;
+    }
+  }
+  
+  .navicon {
+    margin-right: 100 px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+  }

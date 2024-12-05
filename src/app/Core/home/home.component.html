@@ -1,0 +1,135 @@
+<app-navbar></app-navbar>
+  <br>
+<div class="container-fluid">
+  <!--Image Slide-->
+  <div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner" routerLink="/allproducts">
+      <!-- First carousel item with two images (pair) -->
+      <div class="carousel-item active">
+        <div class="row">
+          <div class="col-6">
+            <img src="/assets/images/card-image1.jpg" class="d-block w-100 rounded" alt="...">
+          </div>
+          <div class="col-6">
+            <img src="/assets/images/card-image2.jpg" class="d-block w-100 rounded" alt="...">
+          </div>
+        </div>
+      </div>
+      <!-- Second carousel item with two images (pair) -->
+      <div class="carousel-item">
+        <div class="row">
+          <div class="col-6">
+            <img src="/assets/images/card-large-item3.jpg" class="d-block w-100 rounded" alt="...">
+          </div>
+          <div class="col-6">
+            <img src="/assets/images/card-image3.jpg" class="d-block w-100 rounded" alt="...">
+          </div>
+        </div>
+      </div>
+      <!-- Third carousel item with two images (pair) -->
+      <div class="carousel-item">
+        <div class="row">
+          <div class="col-6">
+            <img src="/assets/images/collection-item2.jpg" class="d-block w-100 rounded" alt="...">
+          </div>
+          <div class="col-6">
+            <img src="/assets/images/converse/560845c_01.jpg" class="d-block w-100 rounded" alt="...">
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <br>
+  <section class="discount-coupon py-2 px-4 my-2 py-md-5 my-md-5">
+    <div class="bg-light coupon position-relative p-5">
+      <!-- Bold "10% OFF" label, absolutely positioned -->
+      <div class="position-absolute 
+      bold-text">
+        10% OFF
+      </div>
+    
+      <div class="row justify-content-between align-items-center">
+        <div class="col-lg-7 col-md-12 mb-3">
+          <div class="coupon-header">
+            <h2 class="display-7">10% OFF Discount Coupons</h2>
+            <p class="m-0">Now get 10% OFF on all the purchases</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-12">
+          <div class="btn-wrap">
+            <!-- Dark button, custom hover animation kept for now -->
+            <a [routerLink]="['/allproducts']" class="btn btn-dark btn-lg text-uppercase hvr-sweep-to-right">Shop now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!--Sample Products Sections-->
+  <div class="container-fluid row" style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+    <div class="card mt-3 me-5 cards" style="width:18rem;">
+      <img routerLink="/allproducts"
+      src="/assets/images/nike/card-large-item11.jpg"
+
+        class="card-img-top " alt="...">
+      <div class="card-body text-center">
+        <h5 class="card-title">NIKE</h5>
+      </div>
+    </div>
+    <div class="card mt-3 me-5 cards" style="width: 18rem;">
+      <img routerLink="/allproducts" style="height: 16em;"
+      src="/assets/images/converse/560845c_01.jpg"
+        class="card-img-top " alt="...">
+      <div class="card-body text-center">
+        <h5 class="card-title">CONVERSE</h5>
+      </div>
+    </div>
+    <div class="card mt-3 me-5 cards" style="width: 18rem;">
+      <img routerLink="/allproducts"
+
+      src="/assets/images/adidas/card-large-item12.jpg"
+        class="card-img-top " alt="...">
+      <div class="card-body text-center">
+        <h5 class="card-title ">ADIDAS</h5>
+      </div>
+    </div>
+    <div class="card mt-3 me-5 cards" style="width: 18rem;">
+      <img routerLink="/allproducts" style="height: 16em"
+        src="/assets/images/othrs/mens-shoes-875950_640.jpg"
+        class="card-img-top " alt="...">
+      <div class="card-body text-center">
+        <h5 class="card-title">LOFERS</h5>
+      </div>
+    </div>
+    <div class="card mt-3 me-5 cards" style="width: 18rem;">
+      <img routerLink="/allproducts" style="height: 16em"
+        src="/assets/images/othrs/newbalance.png"
+        class="card-img-top " alt="...">
+      <div class="card-body text-center">
+        <h5 class="card-title">NEW BALANCE</h5>
+      </div>
+    </div>
+    <div class="card mt-3 me-5 cards" style="width: 18rem;">
+      <img routerLink="/allproducts" style="height: 16em"
+        src="/assets/images/othrs/Vans.png"
+        class="card-img-top " alt="...">
+      <div class="card-body text-center">
+        <h5 class="card-title">VANS</h5>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+<app-footer></app-footer>
+
+
+
+

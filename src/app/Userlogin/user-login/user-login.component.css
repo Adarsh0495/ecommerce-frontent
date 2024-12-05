@@ -1,0 +1,21 @@
+/* Ensure the form doesn't stretch too much on very large screens */
+.card {
+  max-width: 600px; /* Limit the form width on large screens */
+  margin: 0 auto; /* Center the form */
+}
+
+/* Optional: Adjust button width */
+.btn {
+  padding: 12px 20px; /* Increase button padding */
+  font-size: 16px;
+}
+
+/* Optional: Custom color for button hover */
+.btn-red:hover {
+  background-color: #d32f2f; /* Darker red */
+}
+
+.btn-outline-gray:hover {
+  background-color: #6c757d; /* Darker gray */
+  color: white;
+}
