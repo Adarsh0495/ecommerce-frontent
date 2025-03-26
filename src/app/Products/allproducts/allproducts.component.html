@@ -1,31 +1,12 @@
 <app-navbar (searchTextChanged)="onSearchEntered($event)"></app-navbar>
 
-<div class="container  d-flex justify-content-center align-items-center" *ngIf="ifEnteredSearch">
-    <div class="row">
-      <div class="col-md-3" *ngFor="let item of allProducts">
-        <app-product-card [product]="item"></app-product-card>
-      </div>
-    </div>
-  </div>
-  
-
-<div class="container d-flex justify-content-center align-items-center">
+<div class="container d-flex justify-content-center align-items-center" >
   <div class="row">
-    <div class="card mt-5 me-5 cards" style="width: 280px;" *ngFor="let products of searchArray ">
-      <div *ngIf="searchData===''||products.productname.toLowerCase().includes(searchData.toLowerCase())">
-      <a [routerLink]="['/productview/',products.productid]">
-      <img class="card-img-top w-100px image-products" [src]="products.productimage">
-      </a>
-      <div class="card-body">
-      <h5 style="text-decoration: none;">{{products.productname}}</h5>
-      <h6>Price : {{products.productprice | currency:'INR'}}</h6>
-      <div>
-        <button class="btn btn-outline-warning" (click)="addToCart(products.productid)" *ngIf="isLogin">ADD TO CART</button>
-      </div>
+    <div class="col-md-3" *ngFor="let product of allProducts">
+      <app-product-card [product]="product"></app-product-card>
     </div>
-   </div>
   </div>
- </div>
 </div>
-  <br><br>
-  <app-footer></app-footer>
+
+<br><br>
+<app-footer></app-footer>

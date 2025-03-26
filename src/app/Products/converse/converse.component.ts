@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { product } from 'src/app/Core/Models/products.model'; 
-import { UserService } from 'src/app/Core/Service/user.service';
+import { AuthService } from 'src/app/Core/Service/auth.Service';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from 'src/app/Core/Service/products.service'; 
-import { ProductFilterService } from 'src/app/Core/Service/product-filter.service';
+import { keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-converse',
@@ -11,15 +11,28 @@ import { ProductFilterService } from 'src/app/Core/Service/product-filter.servic
   styleUrls: ['./converse.component.css']
 })
 export class ConverseComponent implements OnInit{
-converseshoe:product[]=[]
-constructor(private userserservice:UserService, 
+converseShoe:product[]=[]
+type:string;
+constructor(private authService: AuthService,
             private activatedroute:ActivatedRoute,
-            private filterservice:ProductFilterService){}
+            private productService:ProductsService){
 
-ngOnInit(): void {
-  let type=this.activatedroute.snapshot.paramMap.get('type');
-  this.filterservice.filteringShoes(type);
-  this.converseshoe=this.filterservice.filteredProducts
-this.userserservice.showSearchBox=false
-}
+            }
+
+  ngOnInit(): void {
+  this.authService.showSearchBox=false
+  this.type=this.activatedroute.snapshot.paramMap.get('category');
+  console.log(this.type);
+  this.loadCatagery();
+
+  }
+
+  loadCatagery():void{
+    this.productService.getProductByCategory(this.type).subscribe({
+      next:(Response:product[])=>{
+        this.converseShoe=Response;
+  }
+
+    })
+  }
 }

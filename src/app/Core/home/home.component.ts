@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../Service/user.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../Service/auth.Service';
 
 @Component({
   selector: 'app-home',
@@ -8,14 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(private userservice:UserService,private router:Router){}
+  constructor(    private authService: AuthService,private router:Router){}
 
   ngOnInit(): void {
-    this.userservice.showSearchBox=false
-    this.userservice.showCart=false
+    this.authService.showSearchBox=false
+    this.authService.showCart=false
   }
   logout(){
-    this.userservice.logout()
+    this.authService.logout()
 this.router.navigate(['/signup'])
   }
 }

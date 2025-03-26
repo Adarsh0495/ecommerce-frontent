@@ -1,10 +1,11 @@
 <app-navbar></app-navbar>
-<div class="container  d-flex justify-content-center align-items-center">
-    <div class="row">
-      <div class="col-md-3" *ngFor="let item of converseshoe">
-        <app-product-card [product]="item"></app-product-card>
-      </div>
-    </div>
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let item of converseShoe">
+      <app-product-card [product]="item"></app-product-card>
+    </div>  
   </div>
-  <br><br>
-  <app-footer></app-footer>
+</div>
+
+<app-footer></app-footer>

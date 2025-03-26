@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { product } from 'src/app/Core/Models/products.model'; 
 import { ActivatedRoute } from '@angular/router';
-import { ProductFilterService } from 'src/app/Core/Service/product-filter.service'; 
-import { UserService } from 'src/app/Core/Service/user.service';
+import { AuthService } from 'src/app/Core/Service/auth.Service';
+import { ProductsService } from 'src/app/Core/Service/products.service';
 
 @Component({
   selector: 'app-adidas',
@@ -10,17 +10,29 @@ import { UserService } from 'src/app/Core/Service/user.service';
   styleUrls: ['./adidas.component.css']
 })
 export class AdidasComponent implements OnInit{
-  adidasshoes:product[]=[]
+  adidasShoes:product[]=[]
+  category:string;
+
   constructor(private activatedroute:ActivatedRoute,
-              private filterservice:ProductFilterService,
-              private userservice:UserService){}
+              private productService:ProductsService,
+              private authService: AuthService){}
   
   ngOnInit(): void {
-    let type=this.activatedroute.snapshot.paramMap.get('type')
-    this.filterservice.filteringShoes(type)
-    this.adidasshoes=this.filterservice.filteredProducts
-    console.log(this.adidasshoes);
-    this.userservice.showSearchBox=false
+  this.category=this.activatedroute.snapshot.paramMap.get('category')
+    console.log(this.category);
+    this.authService.showSearchBox=false
+    this.loadAdidas();
   }
+
+  loadAdidas():void{
+    this.productService.getProductByCategory(this.category).subscribe(
+      (Response:product[])=>{
+        this.adidasShoes=Response;
+        console.log(this.adidasShoes);
+        
+      }
+    )
+  }
+
 
 }

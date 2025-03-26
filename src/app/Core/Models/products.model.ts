@@ -1,10 +1,10 @@
 export interface product {
-productid:number
-productname:string
-productimage:string
-type:string
-productprice:number
+productId:number
+productName:string
+description:string
+image:string
+category:string
+productPrice:number
 quantity?:number
-isDeleted?:boolean
 
 }

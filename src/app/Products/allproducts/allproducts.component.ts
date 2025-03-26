@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { product } from '../../Core/Models/products.model';
 import { ProductsService } from '../../Core/Service/products.service';
-import { UserService } from '../../Core/Service/user.service';
-import { ProductFilterService } from '../../Core/Service/product-filter.service';
+import { AuthService } from '../../Core/Service/auth.Service';
 
 @Component({
   selector: 'app-allproducts',
@@ -10,44 +9,57 @@ import { ProductFilterService } from '../../Core/Service/product-filter.service'
   styleUrls: ['./allproducts.component.css']
 })
 export class AllProductsComponent implements OnInit {
-  constructor(private productsservice:ProductsService,
-    private userservice:UserService,
-    private filterservice:ProductFilterService){}
+  constructor(private productsservice:ProductsService,private authService: AuthService){}
 
   allProducts:product[]=[]
-  searchArray:product[]=[]  
-  searchData:string=''
-  ifEnteredSearch: boolean = true
-  isLogin:boolean
+ 
 
   ngOnInit():void {
-    this.allProducts=this.productsservice.allProducts
-    this.userservice.showSearchBox = true
-    this.userservice.showCart = true
-    this.isLogin=this.userservice.isLogged
+    this.loadProducts();
+    this.authService.showSearchBox = true
+    this.authService.showCart = true
  
   }
-  onSearchEntered(searchValue: string) {
-    this.searchData = searchValue
-    console.log(this.searchData);
 
-    this.searchArray = this.allProducts.filter((X) => { return X.productname.toLowerCase().includes(this.searchData.toLowerCase()) })
-    console.log(this.searchArray);
-
-
-    if (this.searchData.length === 0) {
-      this.ifEnteredSearch
-    } else {
-      this.ifEnteredSearch = false
+loadProducts():void{
+  this.productsservice.getAllProducts().subscribe({
+    next:(products)=> {
+      this.allProducts=products;
+    },
+    error:(err)=>{
+      console.error("error loading products"+err);
+      
     }
+  })
 
+}
+
+
+  onSearchEntered(searchValue: string){
+    if(searchValue.trim()===''){
+      this.loadProducts()
+
+    }else{
+      this.productsservice.searchProducts(searchValue).subscribe({
+        next:(products)=>{
+          this.allProducts=products;
+          console.log(this.allProducts);
+          
+        },
+        error:(err)=>{
+          console.error("Error searching products",err);
+          
+        }
+      })
+    }
   }
 
-  addToCart(id:number){
-this.filterservice.addToCart(id)
+    
+
+ 
 
   }
  
-}
+  
   
 

@@ -1,0 +1,159 @@
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+      <!-- Sidebar -->
+      <div 
+        [class.collapsed]="isSideBarCollapsed" 
+        class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark position-sticky top-0" 
+            style="height: 100vh;">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-sm-2 pt-2 text-white min-vh-100">
+          
+          <!-- Sidebar Toggle (only visible on smaller screens) -->
+            <!-- <button class="btn btn-outline-light mb-2 mt-3 ml-0 " (click)="toggleSideBar()" style="border: none; background: transparent; padding-left: 0px;">
+              <img src="../../../assets/sidenav/download.png" 
+                   alt="Toggle Sidebar" style="width: 30px; height: 30px;border-radius: 5px;">
+            </button> -->
+          
+      
+          <!-- Sidebar Menu -->
+          <ul 
+            *ngIf="!isSideBarCollapsed" 
+            [ngClass]="{'expanded': !isSideBarCollapsed, 'collapsed': isSideBarCollapsed}" 
+            class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" 
+            id="menu">
+            <li>
+              <a routerLink="/adminhome" class="nav-link px-0 align-middle text-light">
+                <i class="fs-4 bi-speedometer2"></i> 
+                <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a routerLink="/adminusers" class="nav-link px-0 align-middle text-light">
+                <i class="fs-4 bi-table"></i> 
+                <span class="ms-1 d-none d-sm-inline">Users</span>
+              </a>
+            </li>
+            <li>
+              <a routerLink="/adminproducts" class="nav-link px-0 align-middle text-light">
+                <i class="fs-4 bi-bootstrap"></i> 
+                <span class="ms-1 d-none d-sm-inline">Products</span>
+              </a>
+            </li>
+            <li>
+              <a routerLink="/addproducts" class="nav-link px-0 align-middle text-light">
+                <i class="fs-4 bi-grid"></i> 
+                <span class="ms-1 d-none d-sm-inline">Add Product</span>
+              </a>
+            </li>
+            <li>
+              <a routerLink="/login" class="nav-link px-0 align-middle text-light">
+                <i class="fs-4 bi-people"></i> 
+                <span class="ms-1 d-none d-sm-inline">Sign Out</span>
+              </a>
+            </li>
+          </ul>
+      
+         <!-- Collapsed Sidebar Icons (only visible on smaller screens) -->
+         <ul *ngIf="isSideBarCollapsed"
+         class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
+       <li class="mt-5">
+         <a routerLink="/adminhome"><img class="navicon" src="../../../assets/sidenav/dashboard1.png" alt=""></a>
+       </li>
+       <li class="mt-5">
+         <a routerLink="/adminusers"><img class="navicon" src="../../../assets/sidenav/user1.png" alt=""></a>
+       </li>
+       <li class="mt-5">
+         <a routerLink="/adminproducts"><img class="navicon" src="../../../assets/sidenav/productlist2.png" alt=""></a>
+       </li>
+       <li class="mt-5">
+         <a routerLink="/addproducts"><img class="navicon" src="../../../assets/sidenav/addproduct1.png" alt=""></a>
+       </li>
+       <li class="mt-5">
+         <a routerLink="/login"><img class="navicon" src="../../../assets/sidenav/sign.jpg" alt=""></a>
+       </li>
+     </ul>
+   </div>
+  </div>
+  
+      <!-- Main Content Area -->
+      <div class="col py-3">
+        <div class="container">
+          <div class="col bg-light p-3 p-md-5 rounded shadow form-container">
+            <form class="form-horizontal" [formGroup]="addProductForm" (ngSubmit)="onFormSubmitted()">
+              <legend class="text-center text-dark">ADD PRODUCT</legend>
+  
+              <!-- CATEGORY -->
+              <div class="form-group row mb-3">
+                <label class="col-md-4 col-form-label text-md-right text-dark" for="category">CATEGORY</label>
+                <div class="col-md-6">
+                  <input id="category" formControlName="category" placeholder="PRODUCT CATEGORY" class="form-control" type="text" required>
+                  <div *ngIf="addProductForm.get('category')?.touched && addProductForm.get('category')?.invalid" class="text-danger">
+                    *Category is required
+                  </div>
+                </div>
+              </div>
+  
+              <!-- PRODUCT NAME -->
+              <div class="form-group row mb-3">
+                <label class="col-md-4 col-form-label text-md-right text-dark" for="productName">PRODUCT NAME</label>
+                <div class="col-md-6">
+                  <input id="productName" formControlName="productName" placeholder="PRODUCT NAME" class="form-control" type="text" required>
+                  <div *ngIf="addProductForm.get('productName')?.touched && addProductForm.get('productName')?.invalid" class="text-danger">
+                    *Product name is required
+                  </div>
+                </div>
+              </div>
+  
+              <!-- PRODUCT DESCRIPTION -->
+              <div class="form-group row mb-3">
+                <label class="col-md-4 col-form-label text-md-right text-dark" for="description">PRODUCT DESCRIPTION</label>
+                <div class="col-md-6">
+                  <input id="description" formControlName="description" placeholder="PRODUCT DESCRIPTION" class="form-control" type="text" required>
+                  <div *ngIf="addProductForm.get('description')?.touched && addProductForm.get('description')?.invalid" class="text-danger">
+                    *Description is required
+                  </div>
+                </div>
+              </div>
+  
+              <!-- PRODUCT PRICE -->
+              <div class="form-group row mb-3">
+                <label class="col-md-4 col-form-label text-md-right text-dark" for="productPrice">PRODUCT PRICE</label>
+                <div class="col-md-6">
+                  <input id="productPrice" formControlName="productPrice" placeholder="PRODUCT PRICE" class="form-control" type="number" step="0.01" required>
+                  <div *ngIf="addProductForm.get('productPrice')?.touched && addProductForm.get('productPrice')?.invalid" class="text-danger">
+                    *Price is required and must be non-negative
+                  </div>
+                </div>
+              </div>
+  
+              <!-- PRODUCT IMAGE -->
+              <div class="form-group row mb-3">
+                <label class="col-md-4 col-form-label text-md-right text-dark" for="productImage">PRODUCT IMAGE</label>
+                <div class="col-md-6">
+                  <input id="productImage" class="form-control" type="file" accept="image/*" (change)="onFileSelected($event)">
+                </div>
+              </div>
+  
+              <!-- PRODUCT QUANTITY -->
+              <div class="form-group row mb-3">
+                <label class="col-md-4 col-form-label text-md-right text-dark" for="quantity">PRODUCT QUANTITY</label>
+                <div class="col-md-6">
+                  <input id="quantity" formControlName="quantity" placeholder="PRODUCT QUANTITY" class="form-control" type="number" required>
+                  <div *ngIf="addProductForm.get('quantity')?.touched && addProductForm.get('quantity')?.invalid" class="text-danger">
+                    *Quantity is required and must be at least 1
+                  </div>
+                </div>
+              </div>
+  
+              <!-- Button -->
+              <div class="form-group row">
+                <div class="col-md-4 offset-md-4">
+                  <button id="singlebutton" type="submit" class="btn btn-dark w-100" [disabled]="addProductForm.invalid">Add Product</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>

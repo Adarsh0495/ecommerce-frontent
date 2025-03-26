@@ -1,42 +1,71 @@
 <app-navbar></app-navbar>
-<div class="container" *ngFor="let product of product">
-  <div class="card">
-    <div class="container-fliud">
-      <div class="wrapper row">
-        <div class="preview col-md-6">
 
-          <div class="preview-pic tab-content">
-            <div class="tab-pane active" id="pic-1"><img [src]="product.productimage" /></div>
-            <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/400/252" /></div>
-            <div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252" /></div>
-            <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252" /></div>
-            <div class="tab-pane" id="pic-5"><img src="http://placekitten.com/400/252" /></div>
+<div class="container mt-5" *ngIf="!isLoading && product">
+  <div class="card shadow-lg p-4">
+    <div class="container-fluid">
+      <div class="row">
+        
+        <!-- Left Side: Product Images -->
+        <div class="col-md-6">
+          <div class="preview-pic tab-content text-center">
+            <div class="tab-pane active" id="pic-1">
+              <img [src]="product.image" class="img-fluid rounded" />
+            </div>
           </div>
-
-
         </div>
-        <div class="details col-md-6 right-section">
-          <h3 class="product-title">{{product.productname}}</h3>
-          <div class="rating">
-            <div class="stars">
+
+        <!-- Right Side: Product Details -->
+        <div class="col-md-6">
+          <h3 class="product-title">{{ product.productName }}</h3>
+          <h5 class="text-muted">Category: <span class="badge bg-primary">{{ product.category }}</span></h5>
+
+          <div class="rating my-2">
+            <div class="stars text-warning">
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star"></span>
               <span class="fa fa-star"></span>
             </div>
-            <span class="review-no">41 reviews</span>
+            <span class="review-no text-muted">41 reviews</span>
           </div>
-          <h4 class="price">current price : <span>{{product.productprice|currency:'INR'}}</span></h4>
-          <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
 
+          <h4 class="price">Current Price: 
+            <span class="text-success fw-bold">{{ product.productPrice | currency:'INR' }}</span>
+          </h4>
 
-          <div class="action">
-            <button class="add-to-cart btn btn-default" type="button" (click)="addToCart()">Add To
-              Cart</button>
-            <button class="like btn btn-success " type="button" style="margin-left: 10px;"><span class="fa fa-heart">Buy
-                Now</span></button>
+          <p *ngIf="product.quantity > 0" class="text-success fw-bold">In Stock ({{ product.quantity }} Available)</p>
+          <p *ngIf="product.quantity <= 0" class="text-danger fw-bold">Out of Stock</p>
+
+          <p class="text-muted"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
+
+          <!-- Product Description -->
+          <div class="mt-3">
+            <h5>Product Description</h5>
+            <p class="text-muted">{{ product.description }}</p>
           </div>
+
+          <!-- Extra Features -->
+          <div class="mt-3">
+            <h5>Features:</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"> High-quality material</li>
+              <li class="list-group-item"> Fast Delivery</li>
+              <li class="list-group-item"> 30-day return policy</li>
+              <li class="list-group-item"> Free Shipping on orders over ₹1000</li>
+            </ul>
+          </div>
+
+          <!-- Action Buttons (Closer Together) -->
+          <div class="d-flex justify-content-start mt-3">
+            <button class="btn btn-dark px-3 me-2" (click)="addToCart(productId)">
+              <i class="fa fa-shopping-cart"></i> Add To Cart
+            </button>
+            <button class="btn btn-success px-3">
+              <i class="fa fa-bolt"></i> Buy Now
+            </button>
+          </div>
+
         </div>
       </div>
     </div>

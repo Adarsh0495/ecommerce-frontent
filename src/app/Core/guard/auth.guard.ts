@@ -1,16 +1,20 @@
-import { CanActivateFn, Router } from '@angular/router';
-import { UserService } from '../Service/user.service';
-import { inject } from '@angular/core';
+import { inject } from "@angular/core";
+import { CanActivateFn, Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 export const authGuard: CanActivateFn = (route, state) => {
-const service:UserService=inject(UserService)
-const router:Router=inject(Router)
-if(service.isLogged){
-  return true
-}else{
-  alert('You are not logged in please login')
-  router.navigate(['/login'])
-  return false
-}
+  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('role');
+  console.log('authGuard - token:', token, 'role:', role);
+  const router: Router = inject(Router);
+  const toast: ToastrService = inject(ToastrService);
 
+  if (token && role === 'ROLE_USER') {
+    return true;
+  } else {
+    toast.error('User access only. Please log in as a user.');
+    router.navigate(['/user-login']);
+    return false;
+  }
 };
+

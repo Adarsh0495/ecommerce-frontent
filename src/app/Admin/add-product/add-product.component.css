@@ -10,10 +10,12 @@
   }
   
   .expanded {
+    padding-left: 10px;
     transition: padding-left 0.3s ease;
   }
   
   .collapsed {
+    padding-right: 100px;
     transition: padding-left 0.3s ease;
   }
   
@@ -30,20 +32,11 @@
     border-radius: 50px;
   }
 
-  .navicon:hover{
+.navicon:hover{
+  transform: scale(1.1);    
+  transition: all 0.1s ease-in-out;
+}
+  button:hover {
     transform: scale(1.1);    
-    transition: all 0.1s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
-    button:hover {
-      transform: scale(1.1);    
-      transition: all 0.2s ease-in-out;
-    }
-  /* iygiygigiu */
-
-  .form-container {
-    border: 1px solid #dee2e6; /* Light border for better definition */
-  }
-  
-
-
-  

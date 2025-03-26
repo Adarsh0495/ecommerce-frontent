@@ -1,10 +1,9 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../../Core/Service/user.service';
+import { AuthService } from '../../Core/Service/auth.Service';
 import { ToastrService } from 'ngx-toastr';
 import { user } from 'src/app/Core/Models/user.model';
-
 
 @Component({
   selector: 'app-user-registration',
@@ -12,23 +11,39 @@ import { user } from 'src/app/Core/Models/user.model';
   styleUrls: ['./user-registration.component.css']
 })
 export class UserRegistrationComponent {
-  @ViewChild('signupform') signupform: NgForm;
-  userSignupDatas: user[] = [];
-  constructor(private router: Router, private userservice: UserService, private toast: ToastrService) { }
-  registerUser() {
-    if (this.signupform.valid) {
-      this.userSignupDatas = this.signupform.value
-      const signUpDats: user = this.signupform.value;
-      signUpDats.role = "user"
-      this.userservice.signupUser.push(signUpDats);
-      this.userservice.signup()
-      this.toast.success('signup successful!');
-      this.router.navigate(['/login'])
-      this.signupform.reset()
+  @ViewChild('signupForm') signupForm: NgForm; // Reference to the form
+  user: user = { username: '', email: '', password: '' }; // Model for two-way binding
 
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private toast: ToastrService
+  ) {}
+
+  onFormSubmitted() {
+    if (this.signupForm.valid) {
+      const signUpData = {
+        username: this.signupForm.value.username, 
+        email: this.signupForm.value.email,
+        password: this.signupForm.value.password
+      };   
+         console.log('Signup Data:', signUpData);
+
+      this.authService.signup(signUpData).subscribe({
+        next: (res) => {
+          console.log('Response:', res);
+
+          this.toast.success('Signup successful!');
+          this.router.navigate(['/login']);
+          this.signupForm.resetForm(); 
+        },
+        error: (err) => {
+          console.error('Signup Error:', err);
+          this.toast.error(err.error?.error || 'Signup failed');
+        }
+      });
     } else {
-      this.toast.error('please fill in the required fields.');
+      this.toast.error('Please fill in all required fields.');
     }
   }
 }
-

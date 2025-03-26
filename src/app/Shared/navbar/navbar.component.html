@@ -23,17 +23,16 @@
               Collections
             </a>
             <ul class="dropdown-menu" >
-              <li><a class="dropdown-item" routerLink="/nike/Nike">Nike</a></li>
-              <li><a class="dropdown-item" routerLink="/adidas/Adidas">Adidas</a></li>
-              <li><a class="dropdown-item" routerLink="/converse/Converse">Converce</a></li>
-              <li><a class="dropdown-item" routerLink="/other/Other">Other</a></li>
+              <li><a class="dropdown-item" routerLink="/nike/nike">Nike</a></li>
+              <li><a class="dropdown-item" routerLink="/adidas/adidas">Adidas</a></li>
+              <li><a class="dropdown-item" routerLink="/converse/converse">Converce</a></li>
+              <li><a class="dropdown-item" routerLink="/other/other">Other</a></li>
             </ul>
           </li>
         </ul>
         <form class="d-flex" role="search"  *ngIf="showSearchBox">
           <input class="form-control me-2  rounded-pill" name="searchdata" type="search"  placeholder="Search"
             aria-label="Search" [(ngModel)]="searchData" (input)="onsearchTextChanged()" >
-          <!-- <button class="btn btn-outline-success" (click)="searchProduct()" type="submit">Search</button> -->
         </form>
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" routerLink="/signup" *ngIf="!loggedIn">Login or SignUp</a></li>

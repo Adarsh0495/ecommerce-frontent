@@ -1,31 +1,26 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import {  Observable } from 'rxjs';
 import { user } from '../Models/user.model';
-import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
+import { product } from '../Models/products.model';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AdminService {
-  adminUser:user[]=[]
-  adminUsers:user[]=[]
-toast=inject(ToastrService)
-  constructor() { 
-    const localdata=localStorage.getItem('user')
 
-    if(localdata!=null){
-      this.adminUser=JSON.parse(localdata)
-      console.log(localdata);
+    constructor( private http: HttpClient) {}
 
-      // if(typeof this.adminUser==='object'){
-      //   this.adminUsers.push(Object.values(this.adminUser))
-      // }else{
-      //   this.toast.info('something went wrong')
-      // }
-
+    adminLogin(data: any): Observable<any> {
+        return this.http.post('http://localhost:8080/api/login', data);
     }
-  }
 
-   
+    getAllUsers(): Observable<user[]> {
+        return this.http.get<user[]>('http://localhost:8080/api/admin/users')
+    }
+
+    getAllProducts():Observable<product[]>{
+        return this.http.get<product[]>('http://localhost:8080/api/admin/products')
+    }
     
-   }
-
+}

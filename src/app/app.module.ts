@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'; 
 import { AppRoutingModule } from './app-routing.module';
-import { CoreModule } from './Core/core.module';
 import { ProductsModule } from './Products/products.module';
 import { SharedModule } from './Shared/shared.module';
-import { RouterModule } from '@angular/router';
-import { UserLoginComponent } from './Userlogin/user-login/user-login.component';
-import { UserRegistrationComponent } from './Userlogin/user-registration/user-registration.component';
+import { RouterModule } from '@angular/router'; 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './Core/core.module';
+import { AuthInterceptor } from './Core/intercepters/auth-intercepter';
 import { AdminModule } from './Admin/admin.module';
 
 
@@ -31,6 +31,7 @@ import { AdminModule } from './Admin/admin.module';
     SharedModule,
     AdminModule,
     RouterModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
@@ -40,12 +41,16 @@ import { AdminModule } from './Admin/admin.module';
       // easeTime:1000
       // disableTimeOut:true
       // newestOnTop:true
+      
     }),
     
   
   ],
 
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

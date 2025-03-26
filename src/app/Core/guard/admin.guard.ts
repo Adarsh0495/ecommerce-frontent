@@ -1,18 +1,19 @@
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { inject } from "@angular/core";
+import { CanActivateFn, Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 export const adminGuard: CanActivateFn = (route, state) => {
-  const adminToken=localStorage.getItem('adminToken')
-  const router:Router=inject(Router);
-  const toast:ToastrService=inject(ToastrService);
-  if(adminToken){
-    return true;   
+  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('role');
+  console.log('adminGuard - token:', token, 'role:', role);
+  const router: Router = inject(Router);
+  const toast: ToastrService = inject(ToastrService);
 
-  }else{
-    alert('You are not logged in please login')
-  router.navigate(['/adminlogin'])
-return false
+  if (token && role === 'ROLE_ADMIN') {
+    return true;
+  } else {
+    toast.error('Admin access only. Please log in as an admin.');
+    router.navigate(['/admin-login']);
+    return false;
   }
-
 };

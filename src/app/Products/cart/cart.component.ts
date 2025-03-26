@@ -1,40 +1,94 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/Core/Service/user.service'; 
-import { ProductFilterService } from 'src/app/Core/Service/product-filter.service';
-import { product } from 'src/app/Core/Models/products.model'; 
+import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/Core/Service/auth.Service';
+import { CartService } from 'src/app/Core/Service/cart.service'; 
+import { product } from 'src/app/Core/Models/products.model';
+import { CartItem } from 'src/app/Core/Models/cartItems';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit{
+export class CartComponent implements OnInit {
+  cartProducts:CartItem[]= [];
+  totalQuantity: number = 0;
+  totalPrice: number = 0;
+  @Input()product:product
 
-  totalPrice = 0;
-  totalQuantity = 0
-  cartProducts: product[] = []
-  constructor(private userService: UserService, private filterService: ProductFilterService) {
-  }
+  constructor(
+    private authService: AuthService,
+    private cartService: CartService 
+  ) {}
+
   ngOnInit(): void {
-    this.userService.showSearchBox = false;
-    this.userService.showCart = true
-    this.cartProducts = this.filterService.toCartProducts
-    this.updateTotalPrice()    
+    this.authService.showSearchBox = false;
+    this.authService.showCart = true;
+    this.loadCart();
+  }  
+
+  loadCart(): void {
+    this.cartService.getCartItems().subscribe({
+      next: (item:CartItem[]) => {
+        this.cartProducts = item
+        console.log("cart items",this.cartProducts);
+        
+        this.calculateTotals();
+      },
+      error: (err) => {
+        console.error('Error loading cart:', err)
+        this.cartProducts = []; 
+        this.calculateTotals();
+      }
+    });
   }
-  updateTotalPrice() {
-    this.totalPrice = 0;
-    this.totalQuantity = 0;
-    for (let product of this.cartProducts) {
-      this.totalQuantity += product.quantity
-      this.totalPrice += product.quantity * product.productprice
+
+  updateQuantity(product:CartItem):void{
+    if(product.quantity<1){
+      product.quantity=1
     }
+    this.cartService.updateCartItemQuantity(product.cartId,product.quantity).subscribe({
+      next:(item:CartItem[])=>{
+        this.cartProducts=item
+        this.calculateTotals();
+      },
+      error:(err)=>{
+        console.error('Error updating quantity:', err);
+        this.loadCart();
+      }
+    })
   }
 
-  deleteProduct(product) {
-    const index = this.cartProducts.indexOf(product)
-    this.cartProducts.splice(index, 1)
-    this.updateTotalPrice()
+  deleteProduct(product: CartItem): void {
+    this.cartService.deleteCartItem(product.cartId).subscribe({
+      next: (items: CartItem[]) => {
+        this.cartProducts = items
+        this.calculateTotals();
+      },
+      error: (err) => {
+        console.error('Error deleting item:', err);
+        this.loadCart(); 
+      }
+    });
+  }
+
+ 
+  clearCart(): void {
+    this.cartService.clearCart().subscribe({
+      next: (items: CartItem[]) => {
+        this.cartProducts = items
+        this.calculateTotals();
+      },
+      error: (err) => {
+        console.error('Error clearing cart:', err);
+        this.loadCart(); 
+      }
+    });
   }
 
 
+calculateTotals(){
+  this.totalQuantity=this.cartProducts.reduce((sum,item)=>sum+item.quantity,0);
+  this.totalPrice=this.cartProducts.reduce((sum,item)=>sum+item.productPrice*item.quantity,0)
+}
+ 
 }

@@ -1,114 +1,68 @@
-<div class="container-fluid">
-<div class="row flex-nowrap" >
-    <!-- Sidebar -->                                                                        
-    <div 
-      [class.collapsed]="isSideBarCollapsed" 
-      class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark position-sticky top-0" 
-      style="height: 100vh;">
-      <div class="d-flex flex-column align-items-center align-items-sm-start px-sm-2 pt-2 text-white min-vh-100">
-        
-        <!-- Sidebar Toggle (only visible on smaller screens) -->
-        <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none w-100">
-          <button class="btn btn-outline-light mb-2 mt-3 ml-0 " (click)="toggleSideBar()" style="border: none; background: transparent; padding-left: 0px;">
-            <img src="../../../assets/sidenav/download.png" 
-                 alt="Toggle Sidebar" style="width: 30px; height: 30px;border-radius: 5px;">
-          </button>
-        </a>
-    
-        <!-- Sidebar Menu -->
-        <ul 
-          *ngIf="!isSideBarCollapsed" 
-          [ngClass]="{'expanded': !isSideBarCollapsed, 'collapsed': isSideBarCollapsed}" 
-          class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" 
-          id="menu">
-          <li>
-            <a routerLink="/adminhome" class="nav-link px-0 align-middle text-light">
-              <i class="fs-4 bi-speedometer2"></i> 
-              <span class="ms-1 d-none d-sm-inline">Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/adminusers" class="nav-link px-0 align-middle text-light">
-              <i class="fs-4 bi-table"></i> 
-              <span class="ms-1 d-none d-sm-inline">Users</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/adminproducts" class="nav-link px-0 align-middle text-light">
-              <i class="fs-4 bi-bootstrap"></i> 
-              <span class="ms-1 d-none d-sm-inline">Products</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/addproducts" class="nav-link px-0 align-middle text-light">
-              <i class="fs-4 bi-grid"></i> 
-              <span class="ms-1 d-none d-sm-inline">Add Product</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/login" class="nav-link px-0 align-middle text-light">
-              <i class="fs-4 bi-people"></i> 
-              <span class="ms-1 d-none d-sm-inline">Sign Out</span>
-            </a>
-          </li>
-        </ul>
-    
-        <!-- Collapsed Sidebar Icons (only visible on smaller screens) -->
-        <ul *ngIf="isSideBarCollapsed"
-            class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
-          <li class="mt-5">
-            <a routerLink="/adminhome"><img class="navicon" src="../../../assets/sidenav/dashboard1.png" alt=""></a>
-          </li>
-          <li class="mt-5">
-            <a routerLink="/adminusers"><img class="navicon" src="../../../assets/sidenav/user1.png" alt=""></a>
-          </li>
-          <li class="mt-5">
-            <a routerLink="/adminproducts"><img class="navicon" src="../../../assets/sidenav/productlist2.png" alt=""></a>
-          </li>
-          <li class="mt-5">
-            <a routerLink="/addproducts"><img class="navicon" src="../../../assets/sidenav/addproduct1.png" alt=""></a>
-          </li>
-          <li class="mt-5">
-            <a routerLink="/login"><img class="navicon" src="../../../assets/sidenav/sign.jpg" alt=""></a>
-          </li>
-        </ul>
-      </div>
+<div class="container-fluid px-5 py-4">
+  <div class="card shadow-lg border-0 rounded">
+    <div class="card-header bg-dark text-white text-center py-3">
+      <h3 class="mb-0">Edit Product</h3>
     </div>
+    
+    <div class="card-body p-4">
+      <form [formGroup]="editProductForm" (ngSubmit)="onFormSubmitted()">
+        
+        <div class="row">
+          <!-- Left Section: Form Inputs -->
+          <div class="col-md-8">
+            <div class="row g-3">
+              <!-- Category -->
+              <div class="col-md-6">
+                <label for="category" class="form-label fw-bold">Category</label>
+                <input id="category" formControlName="category" class="form-control" type="text" placeholder="Enter category" required>
+              </div>
 
-    <div class="container py-5">
-      <div class="col">
-        <div class="card shadow border-0">
-          <div class="card-body bg-light">
-            <h4 class="card-title text-center text-dark mb-4">Edit Product</h4>
-            <form (ngSubmit)="saveChanges()" >
               <!-- Product Name -->
-              <div class="mb-3">
-                <label for="productName" class="form-label text-dark">Product Name</label>
-                <input type="text" class="form-control" id="productName" name="productName" 
-                       [(ngModel)]="product.productname" required>
+              <div class="col-md-6">
+                <label for="productName" class="form-label fw-bold">Product Name</label>
+                <input id="productName" formControlName="productName" class="form-control" type="text" placeholder="Enter product name" required>
               </div>
-    
-              <!-- Product Price -->
-              <div class="mb-3">
-                <label for="productprice" class="form-label text-dark">Product Price</label>
-                <input type="text" class="form-control" id="productprice" name="productprice" 
-                       [(ngModel)]="product.productprice" required>
+
+              <!-- Description -->
+              <div class="col-md-12">
+                <label for="description" class="form-label fw-bold">Product Description</label>
+                <textarea id="description" formControlName="description" class="form-control" rows="2" placeholder="Enter description" required></textarea>
               </div>
-    
-              <!-- Product Type -->
-              <div class="mb-3">
-                <label for="producttype" class="form-label text-dark">Product Type</label>
-                <input type="text" class="form-control" id="producttype" name="producttype" 
-                       [(ngModel)]="product.type" required>
+
+              <!-- Price & Quantity -->
+              <div class="col-md-6">
+                <label for="productPrice" class="form-label fw-bold">Product Price</label>
+                <input id="productPrice" formControlName="productPrice" class="form-control" type="number" step="0.01" placeholder="Enter price" required>
               </div>
-    
-              <!-- Submit Button -->
-              <div class="d-grid">
-                <button type="submit" class="btn btn-dark">Save Changes</button>
+
+              <div class="col-md-6">
+                <label for="quantity" class="form-label fw-bold">Product Quantity</label>
+                <input id="quantity" formControlName="quantity" class="form-control" type="number" placeholder="Enter quantity" required>
               </div>
-            </form>
+            </div>
+          </div>
+
+          <!-- Right Section: Image Upload (Fixed Small Space) -->
+          <div class="col-md-4 d-flex flex-column align-items-center">
+            <label for="productImage" class="form-label fw-bold">Product Image</label>
+            <input id="productImage" class="form-control" type="file" accept="image/*" (change)="onFileSelected($event)">
+            
+            <!-- Fixed Image Preview Space -->
+            <div class="mt-3 d-flex align-items-center justify-content-center" 
+                 style="width: 200px; height: 200px; border: 1px solid #ddd; overflow: hidden; border-radius: 10px;">
+              <img *ngIf="imagePreview" [src]="imagePreview" alt="Preview" 
+                   class="img-fluid rounded" style="max-width: 100%; max-height: 100%;">
+            </div>
           </div>
         </div>
-      </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-center gap-4 mt-4">
+          <button type="submit" class="btn btn-dark w-50">Save</button>
+          <button type="button" class="btn btn-danger px-5 py-2" (click)="cancel()">Cancel</button>
+        </div>
+
+      </form>
     </div>
+  </div>
 </div>

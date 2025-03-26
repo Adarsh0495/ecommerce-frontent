@@ -7,11 +7,11 @@ import { ConverseComponent } from './converse/converse.component';
 import { OtherComponent } from './other/other.component';
 
 const routes: Routes = [
-  {path:'',component:AllProductsComponent},
-{path:'nike/:type',component:NikeComponent},
-{path:'adidas/:type',component:AdidasComponent},
-{path:'converse/:type',component:ConverseComponent},
-{path:'other/:type',component:OtherComponent},
+{path:'',component:AllProductsComponent},
+{path:'nike/:category',component:NikeComponent},
+{path:'adidas/:category',component:AdidasComponent},
+{path:'converse/:category',component:ConverseComponent},
+{path:'other/:category',component:OtherComponent},
 ];
 
 @NgModule({

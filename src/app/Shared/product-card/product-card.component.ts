@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CartItem } from 'src/app/Core/Models/cartItems';
 import { product } from 'src/app/Core/Models/products.model'; 
-import { ProductFilterService } from 'src/app/Core/Service/product-filter.service'; 
-import { UserService } from 'src/app/Core/Service/user.service'; 
+import { CartService } from 'src/app/Core/Service/cart.service';
+import { AuthService } from 'src/app/Core/Service/auth.Service'; 
 
 @Component({
   selector: 'app-product-card',
@@ -10,13 +13,37 @@ import { UserService } from 'src/app/Core/Service/user.service';
 })
 export class ProductCardComponent implements OnInit{
   isLoggIn:boolean;
-  constructor(private filterservice:ProductFilterService,private userservice:UserService){}
-  @Input() product:any
+  constructor(private cartService:CartService,
+    private authService: AuthService,
+  private toast:ToastrService){}
+  @Input() product!:product
 
   ngOnInit(): void {
-    this.isLoggIn=this.userservice.isLogged
+    this.isLoggIn=this.authService.isLogged
+
   }
-  addToCart(id:number){
-this.filterservice.addToCart(id)
+
+
+
+  addToCart(productId: number): void {
+    this.cartService.getCartItems().subscribe({ 
+      next: (items:CartItem[]) => {
+        console.log('Added to cart:', items);
+        const exists = items.some(item => item.productId === productId);
+        if (exists){
+          this.toast.error("Product already exists")
+        }
+        else{
+          this.cartService.addItemToCart(productId,1).subscribe({
+            next:(items:CartItem[])=>{
+              console.log('Added to cart:', items);
+              this.toast.success("Product added to cart succesfully")
+
+            }
+          })
+        }
+      },
+      error: (err) => console.error('Error adding to cart:', err)
+    });
   }
 }

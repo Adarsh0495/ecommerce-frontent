@@ -9,8 +9,8 @@ import { CartComponent } from "./cart/cart.component";
 import { ProductDetailsComponent } from "./product-details/product-details.component";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { SharedModule } from "../Shared/shared.module";
 import { ProductsRoutingModule } from "./products-routing.module";
+import { SharedModule } from "../Shared/shared.module";
 
 
 
