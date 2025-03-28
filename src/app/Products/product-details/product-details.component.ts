@@ -34,7 +34,7 @@ export class ProductDetailsComponent implements OnInit {
    if(!this.authService.isLogged){
     this.toast.warning('User not logged in.')
     this.router.navigate(['/login']);
-    return;
+    return; 
    }
     this.loadProduct();
   }

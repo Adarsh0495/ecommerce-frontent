@@ -37,7 +37,6 @@ export class AdminProductsComponent implements OnInit {
 
 
   deleteProduct(product: product):void {
-    if (confirm(`Are you sure you want to delete "${product.productName}"?`)) {
       this.poductService.deleteProduct(product.productId).subscribe({
         next:(response)=>{
          this.adminProducts=this.adminProducts.filter(p=>p.productId !== product.productId)
@@ -59,7 +58,7 @@ export class AdminProductsComponent implements OnInit {
         }
       });
       
-    }
+    
   }
 
   toggleSideBar(): void {

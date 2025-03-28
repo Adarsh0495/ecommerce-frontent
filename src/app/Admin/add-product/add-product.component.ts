@@ -10,6 +10,7 @@ import { ProductsService } from 'src/app/Core/Service/products.service';
 })
 export class AddProductComponent {
   isSideBarCollapsed: boolean = false;
+  isLoading: boolean = false; 
   addProductForm: FormGroup;
   productImage: File | null = null;
 
@@ -47,6 +48,10 @@ export class AddProductComponent {
 
 
   onFormSubmitted(): void {
+
+    if (this.isLoading) {
+      return; 
+    }
     if (this.addProductForm.invalid) {
       this.toast.error('Please fill all required fields correctly.');
       return;
@@ -57,6 +62,7 @@ export class AddProductComponent {
       return;
     }
   
+    this.isLoading = true
     const formData = new FormData();
     const productData = {
       productName: this.addProductForm.value.productName,
@@ -82,6 +88,9 @@ export class AddProductComponent {
       error: (err) => {
         console.error('Error adding product:', err);
         this.toast.error('Failed to add product: ' + (err.error?.message || 'Unknown error'));
+      },
+      complete: () => {
+        this.isLoading = false; 
       }
     });
   }

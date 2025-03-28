@@ -147,7 +147,8 @@
               <!-- Button -->
               <div class="form-group row">
                 <div class="col-md-4 offset-md-4">
-                  <button id="singlebutton" type="submit" class="btn btn-dark w-100" [disabled]="addProductForm.invalid">Add Product</button>
+                  <button id="singlebutton" type="submit" class="btn btn-dark w-100" [disabled]="addProductForm.invalid&&isLoading">{{ isLoading ? 'Adding Product...' : 'Add Product' }} </button>
+                  
                 </div>
               </div>
             </form>
