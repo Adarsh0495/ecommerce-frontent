@@ -12,12 +12,13 @@ export class AllProductsComponent implements OnInit {
   constructor(private productsservice:ProductsService,private authService: AuthService){}
 
   allProducts:product[]=[]
- 
+  isLoading: boolean = true;
 
   ngOnInit():void {
     this.loadProducts();
     this.authService.showSearchBox = true
     this.authService.showCart = true
+    
  
   }
 

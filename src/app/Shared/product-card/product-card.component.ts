@@ -22,9 +22,7 @@ export class ProductCardComponent implements OnInit{
     this.isLoggIn=this.authService.isLogged
 
   }
-
-
-
+  
   addToCart(productId: number): void {
     this.cartService.getCartItems().subscribe({ 
       next: (items:CartItem[]) => {
