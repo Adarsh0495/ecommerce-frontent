@@ -1,20 +1,22 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:21
+# Stage 1: Build Angular app using Node
+FROM node:18-alpine AS build
 
-# Set the working directory in the container
 WORKDIR /app
-COPY package*.json ./
-COPY package-lock.json ./
-RUN npm ci
-COPY . .
-RUN npm run build --prod
-# Debug: List the contents of dist/
-RUN ls -la /app/dist
-RUN ls -la /app/dist/ecommerce-frontend
 
-# Stage 2: Serve
+COPY package*.json ./
+RUN npm ci
+
+COPY . .
+RUN npm run build --configuration=production
+
+# Stage 2: Serve with Nginx
 FROM nginx:alpine
-COPY --from=build /app/dist/ecommerce-frontend /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Replace 'ecommerce-frontend' with your actual Angular app folder inside /dist
+COPY --from=build /app/dist/e-commerce /usr/share/nginx/html
+
+# Optional: custom nginx config if needed
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

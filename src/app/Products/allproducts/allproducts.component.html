@@ -1,7 +1,7 @@
 <app-navbar (searchTextChanged)="onSearchEntered($event)"></app-navbar>
 
-<div class="container d-flex justify-content-center align-items-center" >
-  <div class="row">
+<div class="container mt-4">
+  <div class="row justify-content-center">
     <div class="col-md-3" *ngFor="let product of allProducts">
       <app-product-card [product]="product"></app-product-card>
     </div>
