@@ -20,9 +20,13 @@ export class AdminProductsComponent implements OnInit {
 
   ngOnInit(): void {
       this.loadProducts();
+      this.router.events.pipe(
+        filter(event => event instanceof NavigationEnd)
+      ).subscribe(() => {
+        this.loadProducts();
+      });
 
   }
-
 
   loadProducts(){
     this.adminService.getAllProducts().subscribe({
