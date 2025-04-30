@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -8,7 +8,7 @@ import { ProductsService } from 'src/app/Core/Service/products.service';
   selector: 'app-add-products',
   templateUrl: './add-product.component.html'
 })
-export class AddProductComponent {
+export class AddProductComponent{
   isSideBarCollapsed: boolean = false;
   isLoading: boolean = false; 
   addProductForm: FormGroup;
@@ -33,6 +33,8 @@ export class AddProductComponent {
   toggleSideBar(): void {
     this.isSideBarCollapsed = !this.isSideBarCollapsed;
   }
+
+  
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
