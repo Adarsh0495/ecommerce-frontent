@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CartItem } from 'src/app/Core/Models/cartItems';
 import { product } from 'src/app/Core/Models/products.model'; 

@@ -11,8 +11,8 @@ import { user } from 'src/app/Core/Models/user.model';
   styleUrls: ['./user-registration.component.css']
 })
 export class UserRegistrationComponent {
-  @ViewChild('signupForm') signupForm: NgForm; // Reference to the form
-  user: user = { username: '', email: '', password: '' }; // Model for two-way binding
+  @ViewChild('signupForm') signupForm: NgForm; 
+  user: user = { username: '', email: '', password: '' }; 
 
   constructor(
     private router: Router,

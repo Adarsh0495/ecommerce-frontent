@@ -1,7 +1,8 @@
     <div class="card mt-5 me-5  cards" style="width: 280px">
         <div>
             <a [routerLink]="['/productview/',product.productId]">
-                <img class="card-img-top w-100px image-products" [src]="product.image" alt="{{ product.productName }}">            </a>
+                <img class="card-img-top w-100px image-products" [src]="product.image" alt="{{ product.productName }}">           
+            </a>
         <div class="card-body">
             <h5 style="text-decoration: none;">{{product.category}}</h5>
             <h6>Price:{{product.productPrice|currency:'INR'}}</h6>
